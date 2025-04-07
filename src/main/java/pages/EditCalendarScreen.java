@@ -4,6 +4,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,11 +32,11 @@ public class EditCalendarScreen {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
-
+    @Step("Edit calendar screen is displayed")
     public boolean editCalendarScreenIsDisplayed(){
         return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(editCalendarScreenHeader)).isDisplayed();
     }
-
+    @Step("Calendar is beeing deleted")
     public void deleteCalendar(){
        deleteCalendarButton.click();
     }

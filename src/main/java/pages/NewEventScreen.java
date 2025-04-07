@@ -5,6 +5,7 @@ import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
@@ -54,15 +55,18 @@ public class NewEventScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
+    @Step("New event screen loaded")
     public boolean newEventScreenIsDisplayed(){
         return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(newEventScreenContainer)).isDisplayed();
     }
 
+    @Step("New event title set")
     public void setTitle(String title){
         titleField.clear();
         titleField.sendKeys(title);
     }
 
+    @Step("Start day of {day}, month of {month} and hour of {hour} is set")
     public void setStartDateAndTime(String day,String month, String hour){
         startDateButton.click();
         new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(calendarContainer)).isDisplayed();
@@ -72,6 +76,7 @@ public class NewEventScreen {
         new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(hourPicker)).sendKeys(hour);
     }
 
+    @Step("End day of {day}, month of {month} and hour of {hour} is set")
     public void setEndDateAndTime(String day,String month, String hour){
         endDateButton.click();
         new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(calendarContainer)).isDisplayed();
@@ -80,18 +85,18 @@ public class NewEventScreen {
         timePickerButton.click();
         new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(hourPicker)).sendKeys(hour);
     }
-
+    @Step("{travelTime} travel time is set")
     public void selectTravelTime(String travelTime){
         travelTimeButton.click();
         new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(travelTimeContainer)).isDisplayed();
         WebElement element = driver.findElement(AppiumBy.iOSNsPredicateString(String.format("name == \"%s\"", travelTime)));
         element.click();
     }
-
+    @Step("All day button is toggled")
     public void toggleAllDay(){
         allDayToggle.click();
     }
-
+    @Step("No time picker is displayed")
     public boolean timePickerIsNotDisplayed(){
         try {
             return !timePickerButton.isDisplayed();
@@ -99,7 +104,7 @@ public class NewEventScreen {
             return true;
         }
     }
-
+    @Step("Ad new event")
     public void clickAddButton(){
         addButton.click();
     }

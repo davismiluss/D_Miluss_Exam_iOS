@@ -2,6 +2,7 @@ package util;
 
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
+import io.qameta.allure.Step;
 import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
@@ -28,11 +29,13 @@ public class DriverSetup extends ConfigReader {
     protected MonthViewScreen monthViewScreen;
 
     @BeforeSuite
+    @Step("Appium server is started")
     public void startAppiumServer() {
         appiumServerManager.startAppiumServer();
     }
 
     @BeforeMethod
+    @Step("Driver is started")
     public void setUp(){
         XCUITestOptions options = new XCUITestOptions();
         options.setDeviceName(getProperty("device.name"))
@@ -60,13 +63,16 @@ public class DriverSetup extends ConfigReader {
 
     }
 
+
     @AfterMethod(alwaysRun = true)
+    @Step("Driver is closed")
     public void tearDown(){
         if(driver != null){
             driver.quit();
         }
     }
     @AfterSuite(alwaysRun = true)
+    @Step("Appium server is stopped")
     public void stopAppiumServer() {
         appiumServerManager.stopAppiumServer();
     }

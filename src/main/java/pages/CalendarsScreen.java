@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import io.qameta.allure.Step;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
@@ -38,22 +39,22 @@ public class CalendarsScreen {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
-
+    @Step("Calendar screen loaded")
     public boolean calendarsScreenLoaded(){
         return new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(calendarsScreenHeader)).isDisplayed();
     }
-
+    @Step("Navigating to Add Calendar Screen")
     public void navigateToAddCalendarScreen(){
         addCalendarButton.click();
         new WebDriverWait(driver, GlobalVariables.globalTimeout).until(ExpectedConditions.visibilityOf(addCalendarMenuButton)).isDisplayed();
         addCalendarMenuButton.click();
     }
-
+    @Step("Created calendar with the name {calendarName} is displayed")
     public boolean createdCalendarDisplayed(String calendarName){
         WebElement element = driver.findElement(AppiumBy.iOSNsPredicateString(String.format("label == \"%s\" AND type == \"XCUIElementTypeCell\"", calendarName)));
         return element.isDisplayed();
     }
-
+    @Step("Calendars with the names of Calendar and {calendarName} are selected")
     public boolean calendarsAreSelected(String calendarName){
        boolean defaultCalendarSelected = defaultCalendarSelectionStatus.getAttribute("label").equals("selected");
        WebElement element = driver.findElement(AppiumBy.xpath(String.format("//XCUIElementTypeStaticText[@name=\"%s\"]/preceding-sibling::*[1]", calendarName)));
@@ -62,11 +63,13 @@ public class CalendarsScreen {
        return defaultCalendarSelected && createCalendarSelect;
     }
 
+    @Step("Edit calendar for {calendarName} is selected")
     public void clickIButton(String calendarName){
         WebElement element = driver.findElement(AppiumBy.iOSNsPredicateString(String.format("label == \"%s\" AND type == \"XCUIElementTypeOther\"", calendarName)));
         element.click();
     }
 
+    @Step("Calendar with name {calendarName} is no longer displayed")
     public boolean correctCalendarDisplayed(String calendarName){
         boolean defaultCalendarDisplay = defaultCalendar.isDisplayed();
         boolean newCalendarDisplay;
@@ -81,7 +84,7 @@ public class CalendarsScreen {
         return defaultCalendarDisplay && newCalendarDisplay;
 
     }
-
+    @Step("Done button is clicked")
     public void clickDoneButton(){
         doneButton.click();
     }
