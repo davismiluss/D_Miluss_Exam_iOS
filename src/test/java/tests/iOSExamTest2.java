@@ -9,8 +9,8 @@ public class iOSExamTest2 extends DriverSetup {
 
     @Test(testName = "iOS Exam Test 2")
     public void iOSExamTest2(){
-        //Assert.assertTrue(splashScreen.splashScreenLoaded(), "Splash Screen not Loaded");
-        //splashScreen.clickContinueButton();
+        Assert.assertTrue(splashScreen.splashScreenLoaded(), "Splash Screen not Loaded");
+        splashScreen.clickContinueButton();
         Assert.assertTrue(calendarHomeScreen.calendarHomeScreenLoaded(), "Calendar home screen not loaded");
 
         calendarHomeScreen.clickCalendarsButton();

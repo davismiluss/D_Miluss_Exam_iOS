@@ -1,4 +1,4 @@
-name: iOS Mobile Test Automation - Booking App
+name: iOS Mobile Test Automation - Calendar App
 
 on:
   workflow_dispatch:
