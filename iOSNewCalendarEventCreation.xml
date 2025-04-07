@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="iOS Calendar app event creation flow">
+    <test verbose="2" name="iOSExamTest1">
+        <classes>
+            <class name="tests.IOSExamTest1"/>
+        </classes>
+    </test>
+</suite>
