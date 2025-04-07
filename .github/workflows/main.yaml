@@ -2,6 +2,15 @@ name: iOS Mobile Test Automation - Booking App
 
 on:
   workflow_dispatch:
+    inputs:
+      test_suite:
+        description: 'Choose the test suite to run'
+        required: true
+        default: 'iOSNewCalendarEventCreation'
+        type: choice
+        options:
+          - iOSNewCalendarEventCreation
+          - iOSNewCalendarFlow
 
 jobs:
   test:
@@ -12,7 +21,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run tests
-        run: mvn test -Dtest.suite=iOSNewCalendarFlow.xml
+        run: mvn test -Dtest.suite=${{ inputs.test_suite }}.xml
 
-        -name: Upload allure results as artifact
-        uses:
+      - name: Upload allure results as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results
+
+      - name: Upload screenshots folder as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: screenshots
