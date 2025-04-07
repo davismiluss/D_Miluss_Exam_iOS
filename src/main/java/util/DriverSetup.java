@@ -38,7 +38,7 @@ public class DriverSetup extends ConfigReader {
         options.setDeviceName(getProperty("device.name"))
                 .setPlatformVersion(getProperty("platform.version"))
                 .setBundleId(getProperty("bundle.id"))
-                //.setFullReset(true)
+                .setFullReset(true)
                 .setAutoAcceptAlerts(true);
 
         try{

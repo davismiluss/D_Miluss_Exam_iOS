@@ -13,3 +13,6 @@ jobs:
 
       - name: Run tests
         run: mvn test -Dtest.suite=iOSNewCalendarFlow.xml
+
+        -name: Upload allure results as artifact
+        uses:
